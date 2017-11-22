@@ -1,6 +1,5 @@
 package com.bigdatatag
 
-
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.SQLContext
@@ -62,7 +61,6 @@ object Streaming extends Serializable {
     val clusterCentersJson = clusterCenters.map(a => Document.parse(a.toJson))
     val clusterCentersRdd = ssc.sparkContext.parallelize(clusterCentersJson)
     clusterCentersRdd.saveToMongoDB(WriteConfig(Map("uri" -> mongoAddress.concat("/bigdatatag.clusterCenters"))))
-
 
 
     kafkaStream.foreachRDD((rdd, time) => {
